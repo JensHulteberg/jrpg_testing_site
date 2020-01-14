@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="Enemy" type="Node2D" groups=[
+"Enemy",
+]]
+
+[node name="Sprite" type="Sprite" parent="."]
