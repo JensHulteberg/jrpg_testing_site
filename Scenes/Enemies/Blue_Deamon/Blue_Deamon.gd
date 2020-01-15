@@ -22,6 +22,7 @@ func act():
 	yield(talker, "done_talking")
 	
 	emit_signal("done")
+	print("Blue deamon done!")
 
 func _on_done_talking():
 	pass

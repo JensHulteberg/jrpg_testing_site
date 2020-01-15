@@ -16,6 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Let_us_make_a_jrpg"
+run/main_scene="res://Test_scene.tscn"
 config/icon="res://icon.png"
 
 [display]

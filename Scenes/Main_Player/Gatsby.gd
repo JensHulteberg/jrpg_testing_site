@@ -11,6 +11,8 @@ enum facedir_enum{
 var facedir
 var animation_player
 var raycast
+var interactable = null
+var occupied = false
 
 export (int) var speed = 60
 var raycast_range = 30
@@ -25,18 +27,40 @@ func _ready():
 var velocity = Vector2()
 
 func get_input():
-	velocity = Vector2()
-	if Input.is_action_pressed('ui_right'):
-		velocity.x += 1
+	if !occupied:
+		velocity = Vector2()
+		if Input.is_action_pressed('ui_right'):
+			velocity.x += 1
+		if Input.is_action_pressed('ui_left'):
+			velocity.x -= 1
+		if Input.is_action_pressed('ui_down'):
+			velocity.y += 1
+		if Input.is_action_pressed('ui_up'):
+			velocity.y -= 1
+		velocity = velocity.normalized() * speed
+
+func interact():
+	if !occupied:
+		if Input.is_action_just_pressed("ui_accept"):
+			interactable = raycast.get_collider()
+			if interactable != null:
+				if interactable.has_method("act"):
+					occupied = true
+					interactable.act()
+					yield(interactable, "done")
+					occupied = false
+				else:
+					print(interactable.name + " has no act function")
+
+func raycast_dir():
+	if facedir == facedir_enum.LEFT:
 		raycast.set_cast_to(Vector2(raycast_range, 0))
-	if Input.is_action_pressed('ui_left'):
-		velocity.x -= 1
-		raycast.set_cast_to(Vector2(raycast_range, 0))
-	if Input.is_action_pressed('ui_down'):
-		velocity.y += 1
-	if Input.is_action_pressed('ui_up'):
-		velocity.y -= 1
-	velocity = velocity.normalized() * speed
+	elif facedir == facedir_enum.RIGHT:
+		raycast.set_cast_to(Vector2(-raycast_range, 0))
+	elif facedir == facedir_enum.DOWN:
+		raycast.set_cast_to(Vector2(0, raycast_range))
+	elif facedir == facedir_enum.UP:
+		raycast.set_cast_to(Vector2(0, -raycast_range))
 
 func animate():
 	if velocity.x > 0:
@@ -67,5 +91,7 @@ func animate():
 
 func _physics_process(delta):
 	get_input()
-	move_and_slide(velocity)
+	raycast_dir()
 	animate()
+	interact()
+	move_and_slide(velocity)
