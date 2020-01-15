@@ -25,5 +25,5 @@ margin_right = 235.0
 margin_bottom = 59.0
 custom_fonts/normal_font = SubResource( 1 )
 meta_underlined = false
-text = "Placeholder text. If shown somethign is wrong!"
+text = "Placeholder text. If shown something is wrong!"
 scroll_active = false

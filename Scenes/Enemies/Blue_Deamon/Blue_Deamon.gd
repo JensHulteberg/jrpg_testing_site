@@ -18,11 +18,8 @@ func act():
 	animation_player.play("Attack")
 	yield(animation_player, "animation_finished")
 	
-	talk(["I am the Blue Deamon. Fear me!"])
+	talk(["I am the Blue Deamon. Fear me!", "I am done!", "DU är en bajskorv!"])
 	yield(talker, "done_talking")
-	
-	animation_player.play("Attack")
-	yield(animation_player, "animation_finished")
 	
 	emit_signal("done")
 

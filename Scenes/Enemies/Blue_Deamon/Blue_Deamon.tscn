@@ -20,7 +20,7 @@ tracks/0/keys = {
 "values": [ 90.0, 180.0, 270.0, 0.0 ]
 }
 
-[node name="Blue_Deamon" index="0" instance=ExtResource( 1 )]
+[node name="Blue_Deamon" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]
