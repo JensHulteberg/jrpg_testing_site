@@ -19,10 +19,14 @@ config/name="Let_us_make_a_jrpg"
 run/main_scene="res://Test_scene.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+global="*res://global.gd"
+
 [display]
 
-window/size/width=256
-window/size/height=192
+window/size/width=352
+window/size/height=240
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"
 
