@@ -1,16 +1,10 @@
 extends Node2D
-
-var talker
+var globals
 signal done
 
 func _ready():
-	pass
+	globals = get_node("/root/global")
 
 func act():
 	pass
-
-func talk(thing_to_say):
-	talker = preload("res://Scenes/Talker/Talker.tscn").instance()
-	talker.init(thing_to_say)
-	add_child(talker)
 

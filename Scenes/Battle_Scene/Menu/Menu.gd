@@ -3,9 +3,12 @@ extends Node2D
 var options
 var selected
 var globals
+var active = false
 
 var button_texture = load("res://Assets/button.png")
 var button_highlight = load("res://Assets/button_selected.png")
+
+signal done
 
 func _ready():
 	options = $Buttons.get_children()
@@ -13,9 +16,22 @@ func _ready():
 	
 	globals = get_node("/root/global")
 	globals.active_node = self
+	
+	set_process(active)
+
+func toggle():
+	if visible:
+		hide()
+	elif !visible:
+		show()
+	set_process(!active)
+	active = !active
+	
 
 func _process(delta):
 	detect_input(globals.active_node)
+	
+	print(active)
 	
 	if selected > options.size() - 1:
 		selected = 0
@@ -45,3 +61,5 @@ func select_item():
 	yield(options[selected], "done")
 	set_process(true)
 	globals.active_node = self
+	toggle()
+	emit_signal("done")

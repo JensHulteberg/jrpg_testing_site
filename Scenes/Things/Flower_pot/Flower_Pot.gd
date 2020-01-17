@@ -9,8 +9,8 @@ func _ready():
 	pass # Replace with function body.
 
 func act():
-	talk(["Hello!!!", "What is going on?"])
-	yield(talker, "done_talking")
+	globals.get_talker(["Hello!!!", "What is going on?"])
+	yield(globals, "done_talking")
 	
 	emit_signal("done")
 

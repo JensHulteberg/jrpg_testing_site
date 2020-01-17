@@ -13,6 +13,6 @@ func _ready():
 	globals = get_node("/root/global")
 
 func act():
-	globals.get_talker(["Hello?"])
+	globals.get_talker(["You are attacking!"])
 	yield(globals, "done_talking")
 	emit_signal("done")
