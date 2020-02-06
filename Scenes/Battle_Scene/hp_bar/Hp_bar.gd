@@ -13,4 +13,4 @@ func _process(delta):
 		hp_factor = float(global.player_hp)/100
 	
 	if Input.is_action_just_pressed("ui_accept"):
-		global.player_hp -= 10
+		pass

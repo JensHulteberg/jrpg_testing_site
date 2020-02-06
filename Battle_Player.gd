@@ -7,6 +7,5 @@ func _ready():
 
 func act():
 	$Menu.toggle()
-	print("Player acting")
 	yield($Menu, "done")
 	emit_signal("done")

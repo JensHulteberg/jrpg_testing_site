@@ -31,8 +31,6 @@ func toggle():
 func _process(delta):
 	detect_input(globals.active_node)
 	
-	print(active)
-	
 	if selected > options.size() - 1:
 		selected = 0
 	elif selected < 0:
