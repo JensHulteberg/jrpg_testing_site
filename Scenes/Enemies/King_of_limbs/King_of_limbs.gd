@@ -6,7 +6,7 @@ func _ready():
 	pass
 
 func act():
-	global.get_auto_talker(["Help me!"])
+	global.get_auto_talker(["King of Limbs..."])
 	yield(global, "done_talking")
 	
 	$AnimationPlayer.play("Attack")

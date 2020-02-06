@@ -10,6 +10,7 @@ func _ready():
 	location = get_position()
 	x = location.x
 	y = location.y
+	set_process(false)
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_left"):
