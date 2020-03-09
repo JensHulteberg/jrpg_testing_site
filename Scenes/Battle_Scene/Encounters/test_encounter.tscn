@@ -9,4 +9,4 @@
 [node name="Battle_Player" parent="Actors" index="0" instance=ExtResource( 2 )]
 
 [node name="King_of_limbs" parent="Actors" index="1" instance=ExtResource( 3 )]
-position = Vector2( 225, 140 )
+position = Vector2( 225, 130 )

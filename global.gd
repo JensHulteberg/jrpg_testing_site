@@ -23,3 +23,6 @@ func get_auto_talker(thing_to_say = "PLACEHOLDER"):
 	add_child(talker)
 	yield(talker, "done_talking")
 	emit_signal("done_talking")
+
+func pause_game():
+	get_tree().paused = !get_tree().paused
