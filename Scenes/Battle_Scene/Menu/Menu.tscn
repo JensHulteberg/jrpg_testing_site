@@ -4,8 +4,8 @@
 [ext_resource path="res://Assets/button.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Battle_Scene/Menu/Do.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Coder's Crux.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://Scenes/Battle_Scene/Menu/Run.gd" type="Script" id=5]
-[ext_resource path="res://Scenes/Battle_Scene/Menu/Magic.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Battle_Scene/Menu/Magic.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Battle_Scene/Menu/Run.gd" type="Script" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 4 )
@@ -13,7 +13,7 @@ font_data = ExtResource( 4 )
 [node name="Menu" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="Buttons" type="Node" parent="."]
+[node name="Buttons" type="Node2D" parent="."]
 
 [node name="Do" type="Sprite" parent="Buttons"]
 texture = ExtResource( 2 )
@@ -26,15 +26,31 @@ margin_top = 9.0
 margin_right = 59.0
 margin_bottom = 27.0
 custom_fonts/font = SubResource( 1 )
-text = "FIGHT"
+text = "ATTACK"
+align = 1
+valign = 1
+
+[node name="Magic" type="Sprite" parent="Buttons"]
+position = Vector2( 64, 0 )
+texture = ExtResource( 2 )
+centered = false
+script = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="Buttons/Magic"]
+margin_left = 5.0
+margin_top = 9.0
+margin_right = 59.0
+margin_bottom = 27.0
+custom_fonts/font = SubResource( 1 )
+text = "ITEMS"
 align = 1
 valign = 1
 
 [node name="Run" type="Sprite" parent="Buttons"]
-position = Vector2( 130, 0 )
+position = Vector2( 128, 0 )
 texture = ExtResource( 2 )
 centered = false
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 
 [node name="Label" type="Label" parent="Buttons/Run"]
 margin_left = 5.0
@@ -43,21 +59,5 @@ margin_right = 59.0
 margin_bottom = 27.0
 custom_fonts/font = SubResource( 1 )
 text = "RUN"
-align = 1
-valign = 1
-
-[node name="Magic" type="Sprite" parent="Buttons"]
-position = Vector2( 65, 0 )
-texture = ExtResource( 2 )
-centered = false
-script = ExtResource( 6 )
-
-[node name="Label" type="Label" parent="Buttons/Magic"]
-margin_left = 5.0
-margin_top = 9.0
-margin_right = 59.0
-margin_bottom = 27.0
-custom_fonts/font = SubResource( 1 )
-text = "SPELLS"
 align = 1
 valign = 1

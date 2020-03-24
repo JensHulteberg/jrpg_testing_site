@@ -4,7 +4,8 @@ var map
 var location
 var x
 var y
-export var jump_length = 16
+export var jump_length = 32
+export var start_square = [0, 0]
 
 func _ready():
 	location = get_position()

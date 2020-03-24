@@ -15,10 +15,9 @@ func _ready():
 	for actor in actors:
 		actor.connect("done", self, "_on_actor_finished")
 		if actor.is_in_group("player"):
-			print("Is this happening?")
 			connect("enemy_attacking", actor, "_on_enemy_attacking")
 			connect("enemy_done_attacking", actor, "_on_enemy_done_attacking")
-	global.get_talker(["Battle start!"])
+	global.get_auto_talker(["Battle start!"])
 	yield(global, "done_talking")
 	next_step()
 
@@ -36,4 +35,3 @@ func next_step():
 	if actors[current_turn].is_in_group("Enemy"):
 		emit_signal("enemy_attacking")
 	actors[current_turn].act()
-	print("It is: " + actors[current_turn].name + "s turn!")

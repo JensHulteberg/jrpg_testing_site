@@ -4,15 +4,13 @@ extends Sprite
 # var a = 2
 # var b = "text"
 
-var globals
-
 signal done
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	globals = get_node("/root/global")
+	pass
 
 func act():
-	globals.get_talker(["You are attacking!"])
-	yield(globals, "done_talking")
+	global.get_auto_talker(["You are attacking!"])
+	yield(global, "done_talking")
 	emit_signal("done")

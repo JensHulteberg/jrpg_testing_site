@@ -1,107 +1,15 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Main_Player/Gatsby.gd" type="Script" id=1]
 [ext_resource path="res://Assets/main_character.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Main_Player/player_animations.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Main_Player/Area2D.gd" type="Script" id=4]
 
-[sub_resource type="Animation" id=8]
-resource_name = "idle_down"
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0.0419858 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.99789, 4.78345 )
 
-[sub_resource type="Animation" id=9]
-resource_name = "idle_side"
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0.0419858 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 3 ]
-}
-
-[sub_resource type="Animation" id=10]
-resource_name = "idle_up"
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0.0419858 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 6 ]
-}
-
-[sub_resource type="Animation" id=4]
-resource_name = "walk_down"
-length = 1.2
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 1, 0, 2, 0 ]
-}
-
-[sub_resource type="Animation" id=5]
-length = 0.6
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 4, 3 ]
-}
-
-[sub_resource type="Animation" id=6]
-length = 1.2
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 7, 6, 8, 6 ]
-}
-
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 10, 17.107 )
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 9.87068, 6.40854 )
 
 [node name="Gatsby" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -112,16 +20,22 @@ vframes = 3
 hframes = 3
 frame = 7
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/idle_down = SubResource( 8 )
-anims/idle_side = SubResource( 9 )
-anims/idle_up = SubResource( 10 )
-anims/walk_down = SubResource( 4 )
-anims/walk_side = SubResource( 5 )
-anims/walk_up = SubResource( 6 )
+[node name="AnimationPlayer" parent="." instance=ExtResource( 3 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 7 )
+position = Vector2( 0, 11 )
+shape = SubResource( 1 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 0, 11 )
 enabled = true
+cast_to = Vector2( 0, 10 )
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, 11 )
+shape = SubResource( 2 )
+[connection signal="area_entered" from="Area2D" to="Area2D" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="Area2D" to="Area2D" method="_on_Area2D_area_exited"]

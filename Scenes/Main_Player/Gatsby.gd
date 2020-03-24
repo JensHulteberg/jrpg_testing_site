@@ -7,15 +7,16 @@ enum facedir_enum{
 	RIGHT,
 	DEFAULT
 	}
-	
+
+signal done
+
 var facedir
 var animation_player
 var raycast
 var interactable = null
-var occupied = false
 
 export (int) var speed = 60
-var raycast_range = 30
+var raycast_range = 10
 
 
 #warning-ignore-all:RETURN_VALUE_DISCARDED
@@ -26,8 +27,15 @@ func _ready():
 
 var velocity = Vector2()
 
+func act():
+	var menu = get_tree().get_root().find_node("menu", true, false)
+	if menu != null:
+		menu.enable()
+		yield(menu, "done")
+	emit_signal("done")
+
 func get_input():
-	if !occupied:
+	if !global.disable_player:
 		velocity = Vector2()
 		if Input.is_action_pressed('ui_right'):
 			velocity.x += 1
@@ -40,15 +48,12 @@ func get_input():
 		velocity = velocity.normalized() * speed
 
 func interact():
-	if !occupied:
+	if !global.disable_player:
 		if Input.is_action_just_pressed("ui_accept"):
-			interactable = raycast.get_collider()
+			interactable = $Area2D.object
 			if interactable != null:
 				if interactable.has_method("act"):
-					occupied = true
-					interactable.act()
-					yield(interactable, "done")
-					occupied = false
+					yield(interactable.act(), "completed")
 				else:
 					print(interactable.name + " has no act function")
 

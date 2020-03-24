@@ -18,6 +18,7 @@ func _ready():
 	globals.active_node = self
 	
 	set_process(active)
+	hide()
 
 func toggle():
 	if visible:
@@ -41,9 +42,9 @@ func _process(delta):
 func detect_input(active_node):
 	if active_node == self:
 		if Input.is_action_just_pressed("ui_right"):
-			selected -= 1
-		if Input.is_action_just_pressed("ui_left"):
 			selected += 1
+		if Input.is_action_just_pressed("ui_left"):
+			selected -= 1
 		if Input.is_action_just_pressed("ui_accept"):
 			select_item()
 

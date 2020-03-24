@@ -1,16 +1,23 @@
 extends Node2D
 
-var hp_factor
+var goal_hp
+var prev_hp
 
 func _ready():
-	hp_factor = float(global.player_hp)/100
+	prev_hp = global.player_hp
+	$HP.text = str(global.player_hp) + "/" + str(global.player_max_hp)
 
 func _process(delta):
-	if global.player_hp < 0:
-		hp_factor = 0
-	else:
-		scale.x = hp_factor
-		hp_factor = float(global.player_hp)/100
-	
-	if Input.is_action_just_pressed("ui_accept"):
-		pass
+	update_hp()
+
+func update_hp():
+	goal_hp = global.player_hp
+	if goal_hp != prev_hp:
+		if goal_hp > prev_hp:
+			prev_hp += 1
+		elif goal_hp < prev_hp:
+			prev_hp -= 1
+		$HP.text = str(prev_hp) + "/" + str(global.player_max_hp)
+		
+	elif goal_hp == prev_hp:
+		prev_hp = global.player_hp

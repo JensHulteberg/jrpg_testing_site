@@ -24,7 +24,7 @@ func _process(delta):
 	
 	if text_label.visible_characters <= text[current_index].length():
 		text_label.visible_characters += 1
-	if auto_text and text_label.visible_characters <= text[current_index].length():
+	if auto_text and text_label.visible_characters == text[current_index].length():
 		yield(get_tree().create_timer(1.0), "timeout")
 		proceed_text()
 	elif Input.is_action_just_pressed("ui_accept") and multi_input_stopper > 15:
